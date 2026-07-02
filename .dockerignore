@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment secrets (NEVER ship .env to container)
+.env
+
+# Local data & generated files
+uploads/*
+outputs/*
+logs/*.log
+logs/*.csv
+chroma_db/
+
+# Dev/test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+tests/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docs / CI not needed in image
+docs/
+README.md
+check_app.py
+docker-compose.yml
+*.md
