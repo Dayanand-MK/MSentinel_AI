@@ -9,12 +9,19 @@ from utils.helpers import get_file_size_mb
 from preprocessing import TextCleaner
 from detection import RegexDetector, SpacyDetector
 from utils import remove_duplicate_entities
+from risk import RiskScorer
+from masking import Redactor
+from compliance import RecommendationEngine, ComplianceSummarizer
 
 logger = get_logger(__name__)
 loader = DocumentLoader()
 cleaner = TextCleaner()
 regex_detector = RegexDetector()
 spacy_detector = SpacyDetector()
+risk_engine = RiskScorer()
+redactor = Redactor()
+recommendation_engine = RecommendationEngine()
+report_engine = ComplianceSummarizer()
 
 st.set_page_config(
     page_title=APP_NAME,
@@ -58,6 +65,12 @@ if uploaded_files:
         document = spacy_detector.detect(document)
         document = remove_duplicate_entities(document)
 
+        document = risk_engine.score(document)
+        document = redactor.redact(document)
+
+        document = recommendation_engine.generate(document)
+        document = report_engine.generate(document)
+
         # preview = document.raw_text[ : 500] if document.raw_text else "No text extracted."
 
         # previews.append(
@@ -94,11 +107,47 @@ if uploaded_files:
         hide_index=True,
     )
 
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric(
+        "Risk Score",
+        int(document.risk_score),
+    )
+
+    col2.metric(
+        "Compliance",
+        int(document.compliance_score),
+    )
+
+    col3.metric(
+        "Entities",
+        len(document.entities),
+    )
+
+    col4.metric(
+        "Redacted",
+        document.redaction_count,
+    )
+
+    st.subheader("Risk Assessment")
+
+    st.info(document.risk_explanation)
+
     st.subheader("Document Preview")
 
-    for document in documents:
-        with st.expander(document.original_name):
-            st.code(document.cleaned_text[:1000])
+    tabs = st.tabs(["Original", "Redacted", "Compliance Report"])
+
+    with tabs[0]:
+        st.code(document.cleaned_text)
+
+    with tabs[1]:
+        st.code(document.masked_text)
+
+    with tabs[2]:
+        st.markdown(document.report_markdown)
+
+    st.download_button("Download Redacted Document", document.masked_text, file_name = f"{document.original_name}_redacted.txt",)
+    st.download_button("Download Markdown Report", document.report_markdown, file_name = f"{document.original_name}_report.md",)
 
     st.subheader("Document Statistics")
 

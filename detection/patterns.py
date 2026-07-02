@@ -19,7 +19,7 @@ PATTERNS = {
         r"\b[A-Z]{4}0[A-Z0-9]{6}\b",
 
     "Bank Account":
-        r"\b\d{9,18}\b",
+        r"(?i)(?:account\s*(?:number|no)?|a/c\s*no\.?)\s*[:\-]?\s*(\d{9,18})",
 
     "Credit Card":
         r"\b(?:\d[ -]*?){13,16}\b",

@@ -1,0 +1,10 @@
+John Smith
+
+Email:
+john@gmail.com
+
+PAN:
+ABCDE1234F
+
+Phone:
+9876543210
