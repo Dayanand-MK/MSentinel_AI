@@ -48,3 +48,9 @@ class Document:
     report_markdown : str = ""
 
     recommendations : list[str] = field(default_factory = list)
+
+    chunks : list[str] = field(default_factory = list)
+
+    chunk_embeddings : list = field(default_factory = list)
+
+    vector_ids : list[str] = field(default_factory = list)

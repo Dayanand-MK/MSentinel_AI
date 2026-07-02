@@ -1,36 +1,20 @@
 PATTERNS = {
-
-    "Email":
-        r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b",
-
-    "Phone":
-        r"\b(?:\+91[- ]?)?[6-9]\d{9}\b",
-
-    "PAN":
-        r"\b[A-Z]{5}[0-9]{4}[A-Z]\b",
-
-    "Aadhaar":
-        r"\b\d{4}\s\d{4}\s\d{4}\b",
-
-    "Passport":
-        r"\b[A-PR-WYa-pr-wy][1-9]\d{6}\b",
-
-    "IFSC":
-        r"\b[A-Z]{4}0[A-Z0-9]{6}\b",
-
-    "Bank Account":
-        r"(?i)(?:account\s*(?:number|no)?|a/c\s*no\.?)\s*[:\-]?\s*(\d{9,18})",
-
-    "Credit Card":
-        r"\b(?:\d[ -]*?){13,16}\b",
-
-    "IPv4":
-        r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b",
-
-    "URL":
-        r"https?://[^\s]+",
-
-    "JWT":
-        r"eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+",
-
-}
+    "Email": r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b",
+    "Phone": r"\b(?:\+91[- ]?)?[6-9]\d{9}\b",
+    "PAN": r"\b[A-Z]{5}[0-9]{4}[A-Z]\b",
+    "Aadhaar": r"\b\d{4}[ -]\d{4}[ -]\d{4}\b|\b\d{12}\b",
+    "Passport": r"\b[A-PR-WYa-pr-wy][1-9]\d{6}\b",
+    "Driving License": r"\b[A-Z]{2}\d{2}[ -]?\d{11,13}\b",
+    "IFSC": r"\b[A-Z]{4}0[A-Z0-9]{6}\b",
+    "Bank Account": r"(?i)(?:account\s*(?:number|no)?|a/c\s*no\.?)\s*[:\-]?\s*(\d{9,18})",
+    "Credit Card": r"\b(?:\d[ -]*?){13,16}\b",
+    "Debit Card": r"\b[3-6]\d{3}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b",
+    "CVV": r"(?i)\b(?:cvv|cvc|security\s*code)\s*[:\-]?\s*(\d{3,4})\b",
+    "Password": r"(?i)\b(?:password|passwd|pwd|passcode)\s*[:\-=]\s*([A-Za-z0-9@#$%^&+=_]{6,20})\b",
+    "API Keys": r"(?i)\b(?:api[_-]?key|apikey|token)\s*[:\-=]\s*([A-Za-z0-9_\-]{16,64})\b",
+    "JWT": r"eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+",
+    "AWS Keys": r"(?i)\bAKIA[A-Z0-9]{16}\b|aws[_-]?secret[_-]?(?:key)?\s*[:\-=]\s*([A-Za-z0-9/+=]{40})",
+    "Employee IDs": r"(?i)\b(?:emp(?:loyee)?[_-]?id)\s*[:\-]?\s*([A-Z0-9\-]{4,12})\b",
+    "IPv4": r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b",
+    "URL": r"https?://[^\s]+",
+}

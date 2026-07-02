@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  msentinel-ai:
+    build: .
+    container_name: msentinel_ai_app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    environment:
+      - HF_API_TOKEN=${HF_API_TOKEN}
+      - APP_NAME=MSentinel AI
+      - LOG_LEVEL=INFO
+      - CHROMA_DB_PATH=/app/data/chroma_db
+      - UPLOAD_DIR=/app/uploads
+      - OUTPUT_DIR=/app/outputs
+      - LOG_DIR=/app/logs
+    restart: unless-stopped

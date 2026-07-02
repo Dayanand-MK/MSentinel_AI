@@ -7,13 +7,15 @@ logger = get_logger(__name__)
 
 class TextCleaner:
     def clean(self, document : Document) -> Document:
-        text = document.raw_text
-        text = unicodedata.normalize("NFKC", text)
-        text = text.replace("\x00", "")
-        text = re.sub(r"[ \t]+", "", text)
-        text = re.sub(r"\n{3,}", "\n\n", text)
-        text = re.sub(r"\r", "", text)
-        text = text.strip()
+        if "page_texts" in document.metadata and document.metadata["page_texts"]:
+            cleaned_pages = []
+            for page_text in document.metadata["page_texts"]:
+                cleaned_pages.append(self._clean_text(page_text))
+            document.metadata["cleaned_pages"] = cleaned_pages
+            text = "\n".join(cleaned_pages)
+        else:
+            text = self._clean_text(document.raw_text)
+            document.metadata["cleaned_pages"] = [text]
 
         document.cleaned_text = text
         document.character_count = len(text)
@@ -23,3 +25,13 @@ class TextCleaner:
         logger.info("Text Cleaned for %s", document.original_name)
 
         return document
+
+    def _clean_text(self, text: str) -> str:
+        if not text:
+            return ""
+        text = unicodedata.normalize("NFKC", text)
+        text = text.replace("\x00", "")
+        text = re.sub(r"[ \t]+", " ", text)
+        text = re.sub(r"\n{3,}", "\n\n", text)
+        text = re.sub(r"\r", "", text)
+        return text.strip()

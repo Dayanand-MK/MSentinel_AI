@@ -43,3 +43,10 @@ pydantic
 
 # Testing
 pytest
+
+langchain-text-splitters
+
+sentence-transformers
+
+accelerate
+torch
