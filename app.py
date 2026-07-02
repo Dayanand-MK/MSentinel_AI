@@ -338,7 +338,6 @@ with tabs[1]:
                 progress_bar.progress((idx + 1) / len(uploaded_files))
 
             status_text.write("✅ Scanning completed successfully!")
-            st.balloons()
             time.sleep(1)
             st.rerun()
 
@@ -496,7 +495,7 @@ with tabs[3]:
 
         with col_chat_area:
             st.markdown("### Discussion Console")
-            
+
             # Chat history container
             chat_container = st.container(height=400)
             with chat_container:
@@ -515,19 +514,16 @@ with tabs[3]:
             # Chat Input
             user_query = st.chat_input("Ask a compliance or document security question...", key="chat_user_input")
             if user_query:
-                # Display user query
                 with chat_container:
                     with st.chat_message("user"):
                         st.write(user_query)
                 st.session_state.chat_history.append({"role": "user", "text": user_query})
 
-                # Generate and display response
                 with chat_container:
                     with st.chat_message("assistant"):
-                        with st.spinner("Retrieving facts and generating compliance advisory..."):
+                        with st.spinner("Thinking..."):
                             answer, results = chat_service.ask(user_query)
                             st.write(answer)
-                            
                             sources = []
                             if results and "metadatas" in results and results["metadatas"]:
                                 sources = results["metadatas"][0]
@@ -538,6 +534,7 @@ with tabs[3]:
                 st.session_state.chat_history.append({"role": "assistant", "text": answer, "sources": sources})
                 audit_logger.log_query(user_query, answer, st.session_state.selected_model)
                 st.rerun()
+
 
 # ----------------- TAB 5: TRANSACTION AUDIT LOGS -----------------
 with tabs[4]:

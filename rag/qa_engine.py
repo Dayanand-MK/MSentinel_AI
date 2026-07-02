@@ -112,10 +112,11 @@ class QAEngine:
         
         context = "\n\n".join(chunks)
         prompt = (
-            f"You are MSentinel AI. Summarize the following document content focusing on its core topic, compliance aspects, and security vulnerabilities.\n"
-            f"Document Name: {display_name}\n\n"
-            f"Context:\n{context}\n\n"
-            f"Summary:"
+            f"You are MSentinel AI. Read the document below and write a short, plain-English summary (2-3 sentences max).\n"
+            f"Keep it simple — no technical jargon. Focus on what the document is about and if it contains any sensitive information.\n"
+            f"Document: {display_name}\n\n"
+            f"{context}\n\n"
+            f"Summary (2-3 sentences):"
         )
         return self.llm.generate(prompt)
 
@@ -130,9 +131,10 @@ class QAEngine:
         
         all_context = "\n\n===\n\n".join(comparison_texts)
         prompt = (
-            f"You are MSentinel AI. Compare the following documents based on their '{aspect}'. Highlight the differences in sensitive data exposure, security compliance, and risk level.\n\n"
+            f"You are MSentinel AI. Compare these documents on: {aspect}.\n"
+            f"Write 2-4 short sentences in plain English. State clearly which document has more risk and why. No bullet lists, no jargon.\n\n"
             f"{all_context}\n\n"
-            f"Detailed Comparison:"
+            f"Comparison (2-4 sentences):"
         )
         return self.llm.generate(prompt)
 
@@ -141,11 +143,11 @@ class QAEngine:
         chunks = results.get("documents", [[]])[0]
         context = "\n\n".join(chunks)
         prompt = (
-            f"You are MSentinel AI, a specialized document security compliance expert.\n"
-            f"Answer this compliance question based on the document facts. Relate it to security frameworks (GDPR, SOC2, HIPAA) if applicable.\n\n"
+            f"You are MSentinel AI. Answer the question below in plain, simple English — 2-3 sentences max.\n"
+            f"Avoid complex terms. If there is a compliance risk, say so clearly and briefly.\n\n"
             f"Context:\n{context}\n\n"
-            f"Question:\n{question}\n\n"
-            f"Compliance Advisory Answer:"
+            f"Question: {question}\n\n"
+            f"Answer (2-3 sentences):"
         )
         return self.llm.generate(prompt)
 
@@ -158,9 +160,10 @@ class QAEngine:
         
         context = "\n\n".join(chunks)
         prompt = (
-            f"You are MSentinel AI Security Risk Assessor. Perform a detailed security threat and risk assessment on this text. Identify data exposures and provide reasoning.\n"
-            f"Document Name: {display_name}\n\n"
-            f"Context:\n{context}\n\n"
-            f"Vulnerability & Risk Analysis Report:"
+            f"You are MSentinel AI. Look at the document below and identify any security risks in simple, everyday language.\n"
+            f"Write 2-4 sentences. State what sensitive data was found (e.g. passwords, IDs, financial info) and what action should be taken. Keep it brief and clear.\n"
+            f"Document: {display_name}\n\n"
+            f"{context}\n\n"
+            f"Vulnerability audit (2-4 sentences):"
         )
         return self.llm.generate(prompt)
