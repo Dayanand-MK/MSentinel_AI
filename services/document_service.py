@@ -9,6 +9,6 @@ class DocumentService:
 
         self.pipeline = DocumentPipeline()
 
-    def process_document(self, path: Path):
+    def process_document(self, path: Path, original_name: str = None):
 
-        return self.pipeline.process(path)
+        return self.pipeline.process(path, original_name)

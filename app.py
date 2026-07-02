@@ -315,7 +315,7 @@ with tabs[1]:
                 start_time = time.time()
                 
                 # Execute pipeline processing
-                doc = document_service.process_document(saved_path)
+                doc = document_service.process_document(saved_path, original_name=uploaded_file.name)
                 
                 elapsed_time = time.time() - start_time
                 doc.processing_time = elapsed_time

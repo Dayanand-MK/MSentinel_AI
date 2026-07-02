@@ -10,12 +10,12 @@ class DocumentLoader:
         self.csv = CSVLoader()
         self.ocr = OCRLoader()
 
-    def load(self, file_path: Path) -> Document:
+    def load(self, file_path: Path, original_name: str = None) -> Document:
 
         extension = file_path.suffix.lower()
 
         document = Document(
-            original_name=file_path.name,
+            original_name=original_name if original_name else file_path.name,
             saved_path=file_path,
             extension=extension,
         )

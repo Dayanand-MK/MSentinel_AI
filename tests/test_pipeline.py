@@ -125,3 +125,47 @@ def test_pdf_report_generator(tmp_path, sample_document):
     
     assert pdf_out.exists()
     assert pdf_out.stat().st_size > 0
+
+def test_qa_engine_interception(monkeypatch):
+    from rag.qa_engine import QAEngine
+    qa = QAEngine()
+    
+    # Mock retriever methods to avoid actual database calls and model encoders
+    class DummyRetriever:
+        def get_all_document_names(self):
+            return ["09_mixed_sensitive_data.txt", "08_multi_document_notes.txt"]
+            
+        def search(self, query, top_k=5, where=None):
+            return {"documents": [["This is a test document content chunk."]], "metadatas": [[{"document": "09_mixed_sensitive_data.txt", "chunk": 0}]]}
+            
+    # Mock retriever
+    monkeypatch.setattr(qa, "retriever", DummyRetriever())
+    
+    # Mock LLM generator
+    class DummyLLM:
+        def generate(self, prompt):
+            if "compare" in prompt.lower():
+                return "Mocked Comparison response"
+            if "summarize" in prompt.lower() or "summary" in prompt.lower():
+                return "Mocked Summary response"
+            if "risk" in prompt.lower() or "threat" in prompt.lower():
+                return "Mocked Risk Analysis response"
+            return "Mocked general QA response"
+            
+    monkeypatch.setattr(qa, "llm", DummyLLM())
+    
+    # Test 1: Summarize intercept
+    ans, res = qa.ask("Generate a summary for: 09_mixed_sensitive_data.txt")
+    assert ans == "Mocked Summary response"
+    assert res is not None
+    
+    # Test 2: Risk Audit intercept
+    ans, res = qa.ask("Audit vulnerability risks for: 09_mixed_sensitive_data.txt")
+    assert ans == "Mocked Risk Analysis response"
+    assert res is not None
+    
+    # Test 3: Comparison intercept
+    ans, res = qa.ask("Compare 09_mixed_sensitive_data.txt, 08_multi_document_notes.txt regarding 'sensitive leaks'")
+    assert ans == "Mocked Comparison response"
+    assert res is not None
+
