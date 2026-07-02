@@ -1,0 +1,65 @@
+Customer Information
+
+Name
+
+Anita Sharma
+
+Phone
+
+9876543210
+
+Email
+
+anita@gmail.com
+
+PAN
+
+ABCDE1234F
+
+Passport
+
+P1234567
+
+Driving License
+
+DL1420110012345
+
+Credit Card
+
+4111111111111111
+
+CVV
+
+123
+
+Bank
+
+98765432101
+
+IFSC
+
+HDFC0001234
+
+Password
+
+Welcome@123
+
+Employee ID
+
+EMP9988
+
+AWS Key
+
+AKIAIOSFODNN7EXAMPLE
+
+JWT
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+Confidential
+
+Business merger discussion
+
+Quarterly profit
+
+₹25 Crores

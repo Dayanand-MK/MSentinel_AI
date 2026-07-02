@@ -1,0 +1,42 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment Variables
+.env
+
+# Logs
+logs/*.log
+logs/*.csv
+
+# Uploaded Files
+uploads/*
+
+# Generated Outputs
+outputs/*
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# ChromaDB
+chroma_db/
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Build Files
+build/
+dist/
+*.egg-info/

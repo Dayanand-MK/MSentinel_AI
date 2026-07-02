@@ -1,0 +1,17 @@
+Employee Name: John Smith
+
+Email: john.smith@gmail.com
+
+Phone: +91 9876543210
+
+PAN: ABCDE1234F
+
+Aadhaar: 1234 5678 9123
+
+IFSC: SBIN0001234
+
+Website:
+https://company.com
+
+JWT:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYifQ.signature

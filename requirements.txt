@@ -1,0 +1,45 @@
+streamlit>=1.45.0
+
+# Document Processing
+pymupdf
+pdfplumber
+pandas
+openpyxl
+fitz
+
+# OCR
+pytesseract
+pdf2image
+Pillow
+
+# NLP
+spacy
+
+# LLM & RAG
+langchain
+langchain-community
+llama-index
+chromadb
+sentence-transformers
+huggingface_hub
+transformers
+
+# Visualization
+plotly
+
+# Reports
+reportlab
+
+# Configuration
+python-dotenv
+
+# Utilities
+numpy
+tqdm
+requests
+
+# Logging & Validation
+pydantic
+
+# Testing
+pytest

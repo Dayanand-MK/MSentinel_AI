@@ -1,0 +1,23 @@
+GitHub Token
+
+ghp_123456789abcdefghijklmnopqrstuvwxyz
+
+OpenAI
+
+sk-123456789abcdefghijklmnopqrstuvwxyz
+
+HuggingFace
+
+hf_abcdefghijklmnopqrstuvwxyz123456
+
+JWT
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+Password
+
+SuperSecret@123
+
+Secret Key
+
+abcd123456789secret
