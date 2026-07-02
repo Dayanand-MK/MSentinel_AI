@@ -25,7 +25,10 @@ class DocumentPipeline:
         self.embedding_generator = EmbeddingGenerator()
         self.vector_store = ChromaManager()
 
-    def process(self, file_path: Path, original_name: str = None):
+    def process(self, file_path: Path, *args, **kwargs):
+        original_name = kwargs.get("original_name", None)
+        if not original_name and len(args) > 0:
+            original_name = args[0]
         document = self.loader.load(file_path, original_name)
         document = self.cleaner.clean(document)
         document = self.regex.detect(document)
